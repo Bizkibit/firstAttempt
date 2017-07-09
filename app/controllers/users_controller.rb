@@ -8,14 +8,18 @@ class UsersController < ApplicationController
     session[:user_id] = @user.id
     if @user.save
       session[:user_id] = @user.id
-      redirect_to organization_path
+      flash[:notice] = 'New User created'
+      redirect_to user_path(@user)
     else
+      flash[:alert]= 'fix the errors'
       render :new
     end
 
   end
 
   def show
+    @user = current_user
+    
   end
 
   private
