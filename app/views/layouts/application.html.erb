@@ -6,9 +6,41 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+
   </head>
 
   <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%# link_to 'Biddr', auctions_path, class: 'narbar-brand' %>
+          <a href='/auctions' class='navbar-brand fa fa-rebel fa-2x'> FinalProject</a>
+        </div>
+        <ul class='nav navbar-nav'>
+          <li><%= link_to "Organizations", organizations_path %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Sign Out", sessions_path, method: :delete %></li>
+            <li class='active'><a href='#'>Hello <%= current_user.full_name %></a></li>
+          <% elsif organization_signed_in?%>
+            <li><%= link_to "Sign Out", orgsessions_path, method: :delete %></li>
+            <li class='active'><a href='#'>Hello <%= current_organization.name %></a></li>
+          <% else %>
+          <li><%= link_to "Sign in", new_session_path %></li>
+          <li><%= link_to "Sign up", new_user_path %></li>
+          <% end  %>
+        </ul>
+      </div>
+    </nav>
+    <div id="flash-message">
+      <% if flash[:notice] %>
+        <div class='alert alert-success'><%= flash[:notice] %></div>
+      <% elsif flash[:alert] %>
+        <div class='alert alert-danger'><%= flash[:alert] %></div>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

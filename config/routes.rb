@@ -1,19 +1,13 @@
 Rails.application.routes.draw do
-  get 'users/new'
-
-  get 'users/show'
-
-  # get 'organizations/new'
-  #
-  # get 'organizations/show'
-  #
-  # get 'organizations/index'
-  #
-  # get 'organizations/edit'
 
   resources :organizations
+  resources :users
 
   resources :sessions, only: [:create, :new] do
+    delete :destroy, on: :collection
+  end
+
+  resources :orgsessions, only: [:create, :new] do
     delete :destroy, on: :collection
   end
 

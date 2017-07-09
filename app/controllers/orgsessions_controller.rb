@@ -1,14 +1,14 @@
-class SessionsController < ApplicationController
+class OrgsessionsController < ApplicationController
   def new
   end
 
   def create
 
-    user = User.find_by(email: params[:email])
+    organization = Organization.find_by(name: params[:name])
 
 
-    if user&.authenticate(params[:password])
-      session[:user_id] = user.id
+    if organization&.authenticate(params[:password])
+      session[:organization_id] = organization.id
       redirect_to organizations_path, notice: 'Thank you for signing in!'
     else
 
@@ -18,7 +18,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:organization_id] = nil
     redirect_to organizations_path, notice: 'Signed Out!'
   end
+
 end

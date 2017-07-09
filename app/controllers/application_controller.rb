@@ -9,14 +9,35 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_signed_in?
 
+  def organization_signed_in?
+    if session[:organization_id].present? && current_organization.nil?
+      session[:organization_id] = nil
+    end
+    session[:organization_id].present?
+  end
+  helper_method :organization_signed_in?
+
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
   helper_method :current_user
+
+  def current_organization
+    @current_organization ||= Organization.find_by(id: session[:organization_id])
+  end
+  helper_method :current_organization
 
   def authenticate_user!
     if !user_signed_in?
       redirect_to new_session_path, notice: 'Please sign in!'
     end
   end
+
+  def authenticate_organization!
+    if !organization_signed_in?
+      redirect_to new_session_path, notice: 'Please sign in!'
+    end
+  end
+
 end
