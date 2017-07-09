@@ -47,6 +47,9 @@ gem 'mini_magick'
 gem 'fog'
 gem 'friendly_id', github: 'norman/friendly_id'
 gem 'aasm'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
 
 
 group :development, :test do

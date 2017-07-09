@@ -15,3 +15,13 @@ Organization: <%= @organization.name %>
   <% @approved_memberships.each do |member| %>
     <%= member.user.full_name %>
   <% end  %>
+
+
+<h4>Event</h4>
+<% if @event.present? %>
+  <div class="well well-lg">
+    <p><%= @event.start_date.to_date %></p>
+    <p><%= @event.details %></p>
+    <p><%= @event.spots - @organization.members.count %></p>
+  </div>
+<% end %>

@@ -20,6 +20,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     @pending_memberships = @organization.org_memberships.where(aasm_state: 'pending')
     @approved_memberships = @organization.org_memberships.where(aasm_state: 'approved')
+    @event = @organization.event
   end
 
   def index
