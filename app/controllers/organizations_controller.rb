@@ -18,10 +18,12 @@ class OrganizationsController < ApplicationController
 
   def show
     @organization = Organization.find(params[:id])
-    
+    @pending_memberships = @organization.org_memberships.where(aasm_state: 'pending')
+    @approved_memberships = @organization.org_memberships.where(aasm_state: 'approved')
   end
 
   def index
+    @organizations = Organization.all
   end
 
   def edit

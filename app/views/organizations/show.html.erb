@@ -1,3 +1,17 @@
 <h1>Organizations#show</h1>
 
 Organization: <%= @organization.name %>
+
+
+  <%= link_to 'Request', organization_org_memberships_path(@organization), class:"btn btn-primary", method: :post %>
+  <%= link_to 'Cancel request', organization_org_membership_path(@organization), class:"btn btn-primary", method: :delete %>
+
+  <h3>Pending members</h3>
+  <% @pending_memberships.each do |member| %>
+    <%= member.user.full_name %>
+  <% end  %>
+
+  <h3>Approved members</h3>
+  <% @approved_memberships.each do |member| %>
+    <%= member.user.full_name %>
+  <% end  %>

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :organizations
+  resources :organizations do
+    resources :org_memberships    
+  end
+
   resources :users
 
   resources :sessions, only: [:create, :new] do
