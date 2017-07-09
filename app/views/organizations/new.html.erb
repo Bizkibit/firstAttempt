@@ -1,0 +1,32 @@
+<h1>Organizations#new</h1>
+
+<%= form_for @organization do |f| %>
+  <div class="">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="">
+    <%= f.label :website %>
+    <%= f.text_field :website %>
+  </div>
+
+  <h2>Contact person</h2>
+  <div class="">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="">
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
