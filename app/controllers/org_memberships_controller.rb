@@ -18,7 +18,7 @@ class OrgMembershipsController < ApplicationController
 
 
   def update
-
+    org_membership = OrgMembership.find(params[:id])
   end
 
   # destroy action is only usable by the user

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :organizations do
     resources :org_memberships
     resources :events
+    resources :reviews
   end
 
   resources :users

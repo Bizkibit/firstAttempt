@@ -51,12 +51,30 @@
   </div>
 </div>
 
+<div class="container">
+  <%= simple_form_for [@organization, @review] do |f| %>
+    <%= f.input :body  %>
+    <%= f.input :star %>
+    <%= f.submit %>
+  <% end  %>
+</div>
+
+<h3>pending members</h3>
+<% @pending_memberships.each do |member| %>
+  <div class="well col-lg-6">
+    <%=link_to member.user.full_name, user_path(member.user)  %>
+    <%= link_to 'Approve',organization_org_membership_path(@organization, member), method: :patch, class: 'btn btn-success'  %>
+    <%= link_to 'Reject',organization_org_membership_path(@organization, member), method: :patch, class: 'btn btn-danger' %>
+  </div>
+<% end  %>
 
 
 
 
 
 
+
+<!--////////////////////////////////////////////////////////////////////////////  -->
 <script>
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
