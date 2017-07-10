@@ -1,7 +1,14 @@
-<h1>Organizations#index</h1>
-
-<% @organizations.each do |organization| %>
-  <div class="">
-    <%=link_to "#{organization.name}", organization_path(organization) %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <% @organizations.each do |organization| %>
+        <div class="well">
+          <%=link_to "#{organization.name}", organization_path(organization) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-lg-4 col-lg-offset-8">
+      
+    </div>
   </div>
-<% end %>
+</div>

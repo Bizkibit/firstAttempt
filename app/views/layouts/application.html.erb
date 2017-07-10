@@ -19,11 +19,12 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <%# link_to 'Biddr', auctions_path, class: 'narbar-brand' %>
-          <a href='/auctions' class='navbar-brand fa fa-rebel fa-2x'> FinalProject</a>
+          <a href='/organizations' class='navbar-brand fa fa-rebel fa-2x'> FinalProject</a>
         </div>
         <ul class='nav navbar-nav'>
           <li><%= link_to "Organizations", organizations_path %></li>
           <% if user_signed_in? %>
+            <li><%= link_to 'My profile', user_path(current_user) %></li>
             <li><%= link_to "Sign Out", sessions_path, method: :delete %></li>
             <li class='active'><a href='#'>Hello <%= current_user.full_name %></a></li>
           <% elsif organization_signed_in?%>
