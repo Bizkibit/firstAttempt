@@ -13,7 +13,6 @@ class OrgMembershipsController < ApplicationController
   end
 
   def edit
-
   end
 
 
