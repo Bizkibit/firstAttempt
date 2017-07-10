@@ -50,6 +50,7 @@ gem 'aasm'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'underscore-rails'
+gem 'erd'
 
 
 group :development, :test do

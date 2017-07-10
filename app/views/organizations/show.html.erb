@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+
     <div class="col-lg-6">
       <h1>Organization: <%= @organization.name %></h1>
       <p><strong>Address: </strong><%= @organization.address %></p>
@@ -10,6 +11,7 @@
           <p><strong>Start date: </strong><%= @event.start_date.to_date %></p>
           <p><strong>End date: </strong><%= @event.end_date.to_date %></p>
           <p><%= @event.details %></p>
+          <p><%= link_to 'More info', organization_event_path(@organization, @event) %></p>
           <p><%= @event.spots - @organization.members.count %></p>
           <% if !current_user.org_memberships.where(organization: @organization).present? %>
             <%= link_to 'Request', organization_org_memberships_path(@organization), class:"btn btn-primary", method: :post %>
@@ -19,54 +21,86 @@
         </div>
       <% end %>
     </div>
+
     <div class='col-lg-6' >
       <div id="map" style='width: 600px; height: 400px;'></div>
     </div>
 
   </div>
   <div class="row">
-    <h2>Manage requests</h2>
-    <table class='table table-hover'>
-      <thead>
-        <tr>
-          <th>Pending</th>
-          <th>Accepted</th>
-          <th>Rejected</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for i in (0..@memberships.count) %>
+    <h2>Manage</h2>
+    <hr>
+    <div class="col-lg-4">
+      <table class='table table-hover'>
+        <thead>
           <tr>
-            <td><%=link_to "#{@pending_memberships[i]&.user&.full_name}", user_path() %></td>
-            <td><%=link_to "#{@approved_memberships[i]&.user&.full_name}", user_path() %></td>
-            <td><%=link_to "#{@rejected_memberships[i]&.user&.full_name}", user_path()%></td>
+            <th>Pending</th>
           </tr>
-          <% if @pending_memberships[i].nil? && @approved_memberships[i].nil? && @rejected_memberships[i].nil? %>
-            <% break %>
-          <% end %>
-        <% end  %>
-      </tbody>
+        </thead>
+        <tbody>
+          <% @pending_memberships.each do |member| %>
+          <tr>
+            <td>
+              <%=link_to member.user.full_name, user_path(member.user)%>
+              <%= link_to 'Approve',organization_org_membership_membership_path(@organization, member, 1), method: :patch, class: 'btn btn-success btn-xs'  %>
+              <%= link_to 'Reject',organization_org_membership_membership_path(@organization, member, 0), method: :patch, class: 'btn btn-danger btn-xs' %>
+            </td>
+          </tr>
+          <% end  %>
+        <tbody>
+      </table>
+    </div>
+    <div class="col-lg-4">
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>Approved</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @approved_memberships.each do |member| %>
+          <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
+          <% end  %>
+        <tbody>
+      </table>
+    </div>
+    <div class="col-lg-4">
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>Rejected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rejected_memberships.each do |member| %>
+          <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
+          <% end  %>
+        <tbody>
+      </table>
+    </div>
+  </div>
 
-    </table>
+  <div class="row">
+    <div class="col-lg-6">
+      <%= simple_form_for [@organization, @review] do |f| %>
+      <%= f.input :body  %>
+      <%= f.input :star %>
+      <%= f.submit %>
+      <% end  %>
+    </div>
+    <div class="col-lg-6">
+      <% @reviews.each do |review| %>
+        <p><strong>stars: </strong><%= review.star %></p>
+        <p><%= review.body %></p>
+        <p><strong><%= review.user.full_name %></strong></p>
+        <hr>
+      <% end  %>
+    </div>
   </div>
 </div>
 
-<div class="container">
-  <%= simple_form_for [@organization, @review] do |f| %>
-    <%= f.input :body  %>
-    <%= f.input :star %>
-    <%= f.submit %>
-  <% end  %>
-</div>
 
-<h3>pending members</h3>
-<% @pending_memberships.each do |member| %>
-  <div class="well col-lg-6">
-    <%=link_to member.user.full_name, user_path(member.user)  %>
-    <%= link_to 'Approve',organization_org_membership_membership_path(@organization, member, 1), method: :patch, class: 'btn btn-success'  %>
-    <%= link_to 'Reject',organization_org_membership_membership_path(@organization, member, 0), method: :patch, class: 'btn btn-danger' %>
-  </div>
-<% end  %>
+
 
 
 

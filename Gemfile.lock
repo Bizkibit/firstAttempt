@@ -105,6 +105,9 @@ GEM
       activerecord (> 3.0.0)
       delayed_job (> 2.0.3)
       sinatra (>= 1.4.4)
+    erd (0.4.0)
+      nokogiri
+      rails-erd (>= 0.4.5)
     erubi (1.6.1)
     excon (0.57.1)
     execjs (2.7.0)
@@ -403,6 +406,7 @@ DEPENDENCIES
   cowsay (= 0.3.0)
   delayed_job_active_record
   delayed_job_web
+  erd
   faker!
   fog
   font-awesome-rails!

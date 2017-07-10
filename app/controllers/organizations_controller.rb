@@ -17,13 +17,19 @@ class OrganizationsController < ApplicationController
   end
 
   def show
+
     @organization = Organization.find(params[:id])
+
     @review = Review.new
+    @reviews = @organization.reviews.order(created_at: :desc)
+
     @pending_memberships = @organization.org_memberships.where(aasm_state: 'pending')
     @approved_memberships = @organization.org_memberships.where(aasm_state: 'approved')
     @rejected_memberships = @organization.org_memberships.where(aasm_state: 'rejected')
     @memberships = @organization.org_memberships
+
     @event = @organization.event
+
   end
 
   def index
