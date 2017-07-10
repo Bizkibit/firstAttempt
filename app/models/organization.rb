@@ -6,5 +6,7 @@ class Organization < ApplicationRecord
 
   has_one :event
 
+  geocoded_by :address
+  after_validation :geocode
 
 end
