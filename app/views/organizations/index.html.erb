@@ -1,14 +1,26 @@
 <div class="container">
-  <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-4">
       <% @organizations.each do |organization| %>
         <div class="well">
           <%=link_to "#{organization.name}", organization_path(organization) %>
         </div>
       <% end %>
     </div>
-    <div class="col-lg-4 col-lg-offset-8">
-      
+    <div class="col-lg-5 col-lg-offset-1">
+      <!-- <div style='width: 800px;'> -->
+      <div id="map" style='width: 600px; height: 400px;'></div>
+      <!-- </div> -->
     </div>
-  </div>
 </div>
+
+
+<!-- script goes here -->
+
+<script>
+    handler = Gmaps.build('Google');
+   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+   markers = handler.addMarkers(<%=raw @hash.to_json %>);
+   handler.bounds.extendWith(markers);
+   handler.fitMapToBounds();
+   });
+</script>
