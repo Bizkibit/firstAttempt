@@ -22,7 +22,14 @@ class OrganizationsController < ApplicationController
 
     @review = Review.new
     @reviews = @organization.reviews.order(created_at: :desc)
-
+    @kir = 0
+    if !@reviews.empty?
+      @reviews.each do |r|
+        @kir+= r.star.to_i
+      end
+      @kir=@kir/@reviews.count
+    end
+    @org_membership = OrgMembership.new
     @pending_memberships = @organization.org_memberships.where(aasm_state: 'pending')
     @approved_memberships = @organization.org_memberships.where(aasm_state: 'approved')
     @rejected_memberships = @organization.org_memberships.where(aasm_state: 'rejected')

@@ -3,7 +3,11 @@ class OrgMembershipsController < ApplicationController
   # create action is only used by the user
   def create
     @organization = Organization.find(params[:organization_id])
-    @org_membership = OrgMembership.new(user: current_user, organization: @organization)
+    om_params = params.require(:org_membership).permit(:detail)
+    # @org_membership = OrgMembership.new(user: current_user, organization: @organization)
+    @org_membership = OrgMembership.new om_params
+    @org_membership.user = current_user
+    @org_membership.organization = @organization
     if @org_membership.save
       flash[:notice] = 'Your request has been sent'
     else

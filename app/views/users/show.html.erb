@@ -59,7 +59,7 @@
             <hr>
             <p><strong>Bio: </strong> <%= @user.bio %></p>
             <hr>
-            <p><strong>Member since: </strong> <%= @user.created_at %></p>
+            <p><strong>Member since: </strong> <%= @user.created_at.strftime("%b %Y") %></p>
       </div>
     </div>
   </div>

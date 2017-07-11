@@ -3,32 +3,40 @@
 
     <div class="col-lg-6">
       <h1>Organization: <%= @organization.name %></h1>
+      <p><strong>Review: </strong><%= @kir%></p>
       <p><strong>Address: </strong><%= @organization.address %></p>
       <p><strong>Website: </strong><a href="http://<%= @organization.website%>"><%= @organization.website %></a></p>
-      <h4>Event</h4>
+
+      <h2>Event</h2>
       <% if @event.present? %>
         <div class="well well-lg">
           <p><strong>Start date: </strong><%= @event.start_date.to_date %></p>
           <p><strong>End date: </strong><%= @event.end_date.to_date %></p>
           <p><%= link_to 'More info', organization_event_path(@organization, @event) %></p>
-          <p><%= @event.spots - @organization.members.count %></p>
-
-          <% if user_signed_in? %>
-            <% if !current_user.org_memberships.where(organization: @organization).present? %>
-            <%= link_to 'Request', organization_org_memberships_path(@organization), class:"btn btn-primary", method: :post %>
-            <% else %>
-            <%= link_to 'Cancel request', organization_org_membership_path(@organization), class:"btn btn-danger", method: :delete %>
-            <% end %>
-          <% end %>
-
+          <p><strong>available spots: </strong><%= @event.spots - @approved_memberships&.count %></p>
         </div>
       <% end %>
+
+
+      <% if user_signed_in? %>
+        <% if !current_user.org_memberships.where(organization: @organization).present? %>
+        <%= simple_form_for [@organization, @org_membership] do |f| %>
+          <%= f.input :detail %>
+          <%= f.submit class:'btn btn-primary', value:'Request' %>
+        <%end  %>
+        <%# link_to 'Request', organization_org_memberships_path(@organization), class:"btn btn-primary", method: :post %>
+
+        <% else %>
+        <%= link_to 'Cancel request', organization_org_membership_path(@organization), class:"btn btn-danger", method: :delete %>
+        <% end %>
+      <% end %>
+
     </div>
 
     <div class='col-lg-6' >
-      <div id="map" style='width: 600px; height: 400px;'></div>
+      <div id="map" class='well well-lg' style='height: 400px;'></div>
     </div>
-
+<!-- style='width: 600px; height: 400px;' -->
   </div>
 
   <% if organization_signed_in? && @organization == current_organization %>
@@ -88,10 +96,12 @@
   <% end  %>
 
   <div class="row">
-    <h2>Reviews</h2>
-    <hr>
+      <div class="col-lg-12">
+        <h2>Reviews</h2>
+        <hr>
+      </div>
       <div class="col-lg-6">
-        <% @reviews.each do |review| %>
+        <% @organization.reviews.each do |review| %>
           <p><strong>stars: </strong><%= review.star %></p>
           <p><%= review.body %></p>
           <p><strong><%= review.user.full_name %></strong></p>

@@ -33,7 +33,20 @@ Organization.create([
   User.create({ first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, age: rand(16..40), password: 'pass123'})
 end
 
-me = User.create({first_name: 'Freddy', last_name: 'HM', email: 'admin@admin.com', age: 29, password: 'pass123', bio: Faker::Lorem.paragraph})
+me = User.create({first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.com', age: 29, password: 'pass123', bio: Faker::Lorem.paragraph})
+
+["3894 Commercial St, Vancouver, BC V5N 4G2",
+  "3077 Granville St #204, Vancouver, BC V6H 3J9",
+  "1880 Renfrew St, Vancouver, BC V5M 3H9",
+  "2455 E Broadway, Vancouver, BC V5M 1Y1",
+  "2526 Waverley Ave, Vancouver, BC V5S 4W1",
+  "7850 Champlain Cres, Vancouver, BC V5S 4C7",
+  "900 W 12th Ave, Vancouver, BC V5Z 1N3",
+  "725 Inglewood Ave, West Vancouver, BC V7T 1X5"
+].each do |address|
+  Organization.create(name: Faker::Company.name+" Care", address: address, website: 'http://www.example.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123')
+end
+
 
 organizations = Organization.all
 users = User.all
