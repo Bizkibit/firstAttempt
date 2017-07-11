@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
+  resources :nearby_organizations, only: :index
+
   root 'organizations#index'
 
   # get('/questions/:id/edit', { to: 'questions#edit', as: :edit_question })
