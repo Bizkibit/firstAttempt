@@ -1,17 +1,32 @@
 <div class="container">
-    <div class="col-lg-4">
-      <% @organizations.each do |organization| %>
-        <div class="well">
-          <%=link_to "#{organization.name}", organization_path(organization) %>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-lg-5 col-lg-offset-1">
-      <!-- <div style='width: 800px;'> -->
-      <div id="map" style='width: 600px; height: 400px;'></div>
-      <!-- </div> -->
-    </div>
+  <div class="col-lg-4">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Organization</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @organizations.each do |organization| %>
+          <% if organization.event.spots - organization.members.count > 0 %>
+            <tr><td><%=link_to "#{organization.name}", organization_path(organization) %></td></tr>
+          <% else %>
+            <tr class="danger"><td><%=link_to "#{organization.name}", organization_path(organization) %></td></tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-5 col-lg-offset-1">
+    <!-- <div style='width: 800px;'> -->
+    <div id="map" style='width: 600px; height: 400px;'></div>
+    <!-- </div> -->
+  </div>
 </div>
+<div class="container">
+
+</div>
+
 
 
 <!-- script goes here -->

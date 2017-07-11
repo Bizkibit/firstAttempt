@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     resources :events
     resources :reviews
+    resources :filters, only: [:create]
   end
 
 

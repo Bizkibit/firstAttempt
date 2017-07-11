@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+Review.destroy_all
 Event.destroy_all
 OrgMembership.destroy_all
 User.destroy_all
@@ -29,24 +29,36 @@ Organization.create([
 
   ])
 
-40.times do
+7.times do
   User.create({ first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, age: rand(16..40), password: 'pass123'})
 end
 
-me = User.create({first_name: 'Freddy', last_name: 'HM', email: 'admin@admin.com', age: 29, password: 'pass123'})
+me = User.create({first_name: 'Freddy', last_name: 'HM', email: 'admin@admin.com', age: 29, password: 'pass123', bio: Faker::Lorem.paragraph})
 
 organizations = Organization.all
 users = User.all
 
 
-users.each do |u|
+# users.each do |u|
+#   rand(1..2).times do
+#     OrgMembership.create({user: u, organization: organizations.sample, aasm_state: ['pending','approved'].sample})
+#   end
+# end
+
+organizations.each do |o|
   rand(1..2).times do
-    OrgMembership.create({user: u, organization: organizations.sample, aasm_state: ['pending','approved'].sample})
+    OrgMembership.create({user: users.sample, organization: o, aasm_state: ['pending','approved'].sample})
   end
 end
 
 organizations.each do |o|
   Event.create({start_date: Time.now + rand(0..60).days, end_date: Time.now + rand(2..6).months, spots: rand(4..10), organization: o, details: Faker::Lorem.paragraph})
+end
+
+users.each do |u|
+  rand(1..3).times do
+    Review.create(body: Faker::Lorem.paragraph, star: rand(0..5), organization: organizations.sample, user: u)
+  end
 end
 
 puts 'Done!'

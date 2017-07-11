@@ -33,6 +33,7 @@ class OrganizationsController < ApplicationController
   end
 
   def index
+    @filter = Filter.new
     @organizations = Organization.all
     @organization =  Organization.near([49.2819605,-123.1086604], 1000)
     @hash = Gmaps4rails.build_markers(@organization) do |organization, marker|
