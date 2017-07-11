@@ -4,7 +4,7 @@ class OrgsessionsController < ApplicationController
 
   def create
 
-    organization = Organization.find_by(name: params[:name])
+    organization = Organization.find_by(email: params[:email])
 
 
     if organization&.authenticate(params[:password])

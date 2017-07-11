@@ -10,14 +10,17 @@
         <div class="well well-lg">
           <p><strong>Start date: </strong><%= @event.start_date.to_date %></p>
           <p><strong>End date: </strong><%= @event.end_date.to_date %></p>
-          <p><%= @event.details %></p>
           <p><%= link_to 'More info', organization_event_path(@organization, @event) %></p>
           <p><%= @event.spots - @organization.members.count %></p>
-          <% if !current_user.org_memberships.where(organization: @organization).present? %>
+
+          <% if user_signed_in? %>
+            <% if !current_user.org_memberships.where(organization: @organization).present? %>
             <%= link_to 'Request', organization_org_memberships_path(@organization), class:"btn btn-primary", method: :post %>
-          <% else %>
+            <% else %>
             <%= link_to 'Cancel request', organization_org_membership_path(@organization), class:"btn btn-danger", method: :delete %>
+            <% end %>
           <% end %>
+
         </div>
       <% end %>
     </div>
@@ -27,6 +30,9 @@
     </div>
 
   </div>
+
+  <% if organization_signed_in? && @organization == current_organization %>
+
   <div class="row">
     <h2>Manage</h2>
     <hr>
@@ -47,56 +53,61 @@
             </td>
           </tr>
           <% end  %>
-        <tbody>
-      </table>
-    </div>
-    <div class="col-lg-4">
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Approved</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @approved_memberships.each do |member| %>
-          <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
-          <% end  %>
-        <tbody>
-      </table>
-    </div>
-    <div class="col-lg-4">
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Rejected</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @rejected_memberships.each do |member| %>
-          <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
-          <% end  %>
-        <tbody>
-      </table>
-    </div>
+          <tbody>
+          </table>
+        </div>
+        <div class="col-lg-4">
+          <table class='table table-hover'>
+            <thead>
+              <tr>
+                <th>Approved</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @approved_memberships.each do |member| %>
+                <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
+              <% end  %>
+            <tbody>
+          </table>
+        </div>
+        <div class="col-lg-4">
+          <table class='table table-hover'>
+            <thead>
+              <tr>
+                <th>Rejected</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @rejected_memberships.each do |member| %>
+                <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
+              <% end  %>
+            <tbody>
+          </table>
+        </div>
   </div>
+  <% end  %>
 
   <div class="row">
-    <div class="col-lg-6">
-      <%= simple_form_for [@organization, @review] do |f| %>
-      <%= f.input :body  %>
-      <%= f.input :star %>
-      <%= f.submit %>
+    <h2>Reviews</h2>
+    <hr>
+      <div class="col-lg-6">
+        <% @reviews.each do |review| %>
+          <p><strong>stars: </strong><%= review.star %></p>
+          <p><%= review.body %></p>
+          <p><strong><%= review.user.full_name %></strong></p>
+          <hr>
+        <% end  %>
+      </div>
+      <% if user_signed_in? %>
+        <div class="col-lg-6">
+          <%= simple_form_for [@organization, @review] do |f| %>
+          <%= f.input :body  %>
+          <%= f.input :star %>
+          <%= f.submit %>
+          <% end  %>
+        </div>
       <% end  %>
     </div>
-    <div class="col-lg-6">
-      <% @reviews.each do |review| %>
-        <p><strong>stars: </strong><%= review.star %></p>
-        <p><%= review.body %></p>
-        <p><strong><%= review.user.full_name %></strong></p>
-        <hr>
-      <% end  %>
-    </div>
-  </div>
 </div>
 
 

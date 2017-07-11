@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'welcome/index'
+
   resources :organizations do
     resources :org_memberships do
       resources :memberships, only:[:update]
@@ -23,7 +25,7 @@ Rails.application.routes.draw do
 
   resources :nearby_organizations, only: :index
 
-  root 'organizations#index'
+  root 'welcome#index'
 
   # get('/questions/:id/edit', { to: 'questions#edit', as: :edit_question })
   # patch('/questions/:id', { to: 'questions#update' })
