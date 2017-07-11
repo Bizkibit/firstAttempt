@@ -40,11 +40,16 @@
           <% else %>
           <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign in<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "User sign in", new_session_path %></li>
-              <li><%= link_to "Organization sign in", new_orgsession_path %></li>
+              <li><%= link_to "User", new_session_path %></li>
+              <li><%= link_to "Organization", new_orgsession_path %></li>
             </ul>
           </li>
-          <li><%= link_to 'Sign up', new_user_path %><li>
+          <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign up<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "User", new_user_path %></li>
+              <li><%= link_to "Organization", new_organization_path %></li>
+            </ul>
+          </li>
           <% end  %>
         </ul>
       </div>

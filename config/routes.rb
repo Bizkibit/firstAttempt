@@ -26,8 +26,10 @@ Rails.application.routes.draw do
 
   resources :nearby_organizations, only: :index
 
-  root 'welcome#index'
+  # root 'welcome#index'
+  root 'organizations#index'
 
+  get 'welcome/sign_in', {to: 'welcome#show', as: :welcome_sign_in}
   # get('/questions/:id/edit', { to: 'questions#edit', as: :edit_question })
   # patch('/questions/:id', { to: 'questions#update' })
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
