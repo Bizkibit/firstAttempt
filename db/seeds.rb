@@ -30,10 +30,10 @@ Organization.create([
   ])
 
 7.times do
-  User.create({ first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, age: rand(16..40), password: 'pass123'})
-end
+  User.create({ first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, age: Time.now - rand(16..40).years-rand(0..364).days, password: 'pass123'})
+endr
 
-me = User.create({first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.com', age: 29, password: 'pass123', bio: Faker::Lorem.paragraph})
+me = User.create({first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.com', age: Time.now - 29.years, password: 'pass123', bio: Faker::Lorem.paragraph})
 
 ["3894 Commercial St, Vancouver, BC V5N 4G2",
   "3077 Granville St #204, Vancouver, BC V6H 3J9",

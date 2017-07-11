@@ -4,7 +4,7 @@ class AddDetailToOrgMemberships < ActiveRecord::Migration[5.1]
   end
 
   def down
-    drop_column :org_memberships, :detail
+    remove_column :org_memberships, :detail
   end
 
 end

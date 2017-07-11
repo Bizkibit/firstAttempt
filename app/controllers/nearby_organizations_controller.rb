@@ -1,6 +1,6 @@
 class NearbyOrganizationsController < ApplicationController
   def index
-   @organization =  Organization.near([49.2819605,-123.1086604], 1000)
+   @organization ||=  Organization.near([49.2819605,-123.1086604], 1)
    @hash = Gmaps4rails.build_markers(@organization) do |organization, marker|
      marker.lat organization.latitude
      marker.lng organization.longitude
