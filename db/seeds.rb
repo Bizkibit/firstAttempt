@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Filter.destroy_all
 Review.destroy_all
 Event.destroy_all
 OrgMembership.destroy_all
@@ -31,7 +32,7 @@ Organization.create([
 
 7.times do
   User.create({ first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, age: Time.now - rand(16..40).years-rand(0..364).days, password: 'pass123'})
-endr
+end
 
 me = User.create({first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.com', age: Time.now - 29.years, password: 'pass123', bio: Faker::Lorem.paragraph})
 

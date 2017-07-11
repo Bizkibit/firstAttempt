@@ -1,8 +1,21 @@
-<h1>Nearby Campaigns</h1>
+<div class="container">
+  <h1>Nearby Organizations</h1>
+  <hr>
+  <div class="col-lg-4">
+    <%= simple_form_for @filter do |f| %>
+    <%= f.input :name, label: 'Search by name' %>
+    <hr>
+    <%= f.input :address %>
+    <%= f.input :radius %>
+    <%= f.submit %>
+    <% end %>
+  </div>
 
-<div style='width: 800px;'>
-<div id="map" style='width: 800px; height: 400px;'></div>
+  <div class="col-lg-6 col-lg-offset-2">
+    <div id="map" class='well well-lg' style='height: 400px;'></div>
+  </div>
 </div>
+
 
 <script>
     handler = Gmaps.build('Google');

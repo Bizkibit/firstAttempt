@@ -30,9 +30,9 @@
 
         <ul class='nav navbar-nav'>
           <li><%= link_to "Organizations", organizations_path %></li>
+          <li><%= link_to "Nearby organizations", nearby_organizations_path %></li>
 
           <% if user_signed_in? %>
-            <li><%= link_to "Nearby organizations", nearby_organizations_path %></li>
             <li><%= link_to 'My profile', user_path(current_user) %></li>
             <li><%= link_to "Sign Out", sessions_path, method: :delete %></li>
             <li class='active'><a href='#'>Hello <%= current_user.full_name %></a></li>
