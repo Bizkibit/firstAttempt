@@ -5,7 +5,10 @@ class Organization < ApplicationRecord
   has_many :members, through: :org_memberships, source: :user
   has_many :reviews, dependent: :destroy
 
-  # to search through the organization names 
+  mount_uploaders :pictures, PictureUploader
+
+
+  # to search through the organization names
   scope :search, lambda {|query| where(["name LIKE ?", "%#{query}%"]) }
 
   has_one :event

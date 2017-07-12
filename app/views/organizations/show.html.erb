@@ -37,6 +37,7 @@
         </div>
       <% end %>
 
+      <%= image_tag @organization.pictures[0].url(:large), class:'img-rounded', alt:"Cinque Terre" if @organization.pictures.present? %>
 
       <% if user_signed_in? %>
         <% if !current_user.org_memberships.where(organization: @organization).present? %>

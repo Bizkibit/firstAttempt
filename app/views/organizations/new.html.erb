@@ -1,36 +1,67 @@
-<h1>Organizations#new</h1>
 
-<%= form_for @organization do |f| %>
-  <div class="">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div class="">
-    <%= f.label :website %>
-    <%= f.text_field :website %>
-  </div>
-  <div class="">
-    <%= f.label :address %>
-    <%= f.text_area :address %>
+
+<%= @organization.errors.full_messages.join(', ') %>
+
+<%= form_for @organization, html: { multipart: true } do |f| %>
+<div class="container">
+  <h1>Organizations Sign up</h1>
+  <hr>
+  <div class="col-lg-4">
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :website %>
+      <%= f.text_field :website, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :address %>
+      <%= f.text_field :address, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :pictures %>
+      <%= f.file_field :pictures, multiple: true %>
+    </div>
+
+    <h2>Contact person</h2>
+
+    <div class="form-group">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :phone %>
+      <%= f.text_field :phone, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class:'btn btn-primary'%>
+    </div>
   </div>
 
-  <h2>Contact person</h2>
-  <div class="">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="">
-    <%= f.label :phone %>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-
-  <%= f.submit %>
+</div>
 <% end %>
