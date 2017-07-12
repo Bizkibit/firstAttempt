@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20170712052131) do
     t.bigint "organization_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "additional"
     t.index ["organization_id"], name: "index_events_on_organization_id"
   end
 
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170712052131) do
     t.string "address"
     t.float "longitude"
     t.float "latitude"
+    t.text "additional"
     t.json "pictures"
     t.index ["name"], name: "index_organizations_on_name", unique: true
   end

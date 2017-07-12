@@ -1,4 +1,5 @@
 class NearbyOrganizationsController < ApplicationController
+
   def index
     @filter = Filter.new
 
@@ -18,4 +19,6 @@ class NearbyOrganizationsController < ApplicationController
     end
 
    end
+
+   
 end

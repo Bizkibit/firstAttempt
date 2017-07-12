@@ -19,15 +19,18 @@ Organization.destroy_all
 # end
 
 Organization.create([
+  
   {name: 'Retirement Concepts Seniors Services Ltd', address: '1090 W Georgia St, Vancouver, BC V6E 3V7
-', website: 'retirementconcepts.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email },
+  ', website: 'retirementconcepts.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity" },
+
   {name: 'Canadian In-Home Care Assistance Inc.', address: '852 Seymour St, Vancouver, BC V6B 3L6
-', website: 'canadianinhomecare.ca', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email},
-{name: 'Arbutus Care Centre', address: '4505 Valley Dr, Vancouver, BC V6L 2L1', website: 'reveraliving.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email},
-{name: 'Success', address: '555 Carrall St, Vancouver, BC V6B 2J8', website: 'successbc.car', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email},
+  ', website: 'canadianinhomecare.ca', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity"},
 
-  {name: 'CodeCore', address: '142 W Hastings St, Vancouver, BC V6B 1G8', website: 'https://codecore.ca/', first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.com', password: 'pass123', phone: Faker::PhoneNumber.phone_number}
+  {name: 'Arbutus Care Centre', address: '4505 Valley Dr, Vancouver, BC V6L 2L1', website: 'reveraliving.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity"},
 
+  {name: 'Success', address: '555 Carrall St, Vancouver, BC V6B 2J8', website: 'successbc.car', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity"},
+
+  {name: 'CodeCore', address: '142 W Hastings St, Vancouver, BC V6B 1G8', website: 'https://codecore.ca/', first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.com', password: 'pass123', phone: Faker::PhoneNumber.phone_number, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity"}
   ])
 
 7.times do
@@ -45,7 +48,7 @@ me = User.create({first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.co
   "900 W 12th Ave, Vancouver, BC V5Z 1N3",
   "725 Inglewood Ave, West Vancouver, BC V7T 1X5"
 ].each do |address|
-  Organization.create(name: Faker::Company.name+" Care", address: address, website: 'http://www.example.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email)
+  Organization.create(name: Faker::Company.name+" Care", address: address, website: 'http://www.example.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity")
 end
 
 
@@ -66,7 +69,7 @@ organizations.each do |o|
 end
 
 organizations.each do |o|
-  Event.create({start_date: Time.now + rand(0..60).days, end_date: Time.now + rand(2..6).months, spots: rand(4..10), organization: o, details: Faker::Lorem.paragraph, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity"})
+  Event.create({start_date: Time.now + rand(0..60).days, end_date: Time.now + rand(2..6).months, spots: rand(4..10), organization: o, details: Faker::Lorem.paragraph})
 end
 
 users.each do |u|

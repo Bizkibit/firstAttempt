@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row">
-
     <div class="col-lg-6">
       <h1>Organization: <%= @organization.name %></h1>
       <p><strong>Review: </strong><%= @kir%></p>
@@ -8,50 +7,49 @@
       <p><strong>Website: </strong><a href="http://<%= @organization.website%>"><%= @organization.website %></a></p>
 
       <h2>Event</h2>
-      <% if @event.present? %>
-        <div class="well well-lg">
-          <p><strong>Start date: </strong><%= @event.start_date.to_date %></p>
-          <p><strong>End date: </strong><%= @event.end_date.to_date %></p>
-          <p><strong>available spots: </strong><%= @event.spots - @approved_memberships&.count %></p>
-          <!-- <p><%= link_to 'More info', organization_event_path(@organization, @event) %></p> -->
-          <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">More info</button>
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Details</h4>
-                </div>
-                <div class="modal-body">
-                  <p><%= @event.details%></p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <% if @events.present? %>
+        <% @events.each do |event| %>
+          <div class="well well-lg">
+            <p><strong>Start date: </strong><%= event.start_date.to_date %></p>
+            <p><strong>End date: </strong><%= event.end_date.to_date %></p>
+            <p><strong>available spots: </strong><%= event.spots - @approved_memberships&.count %></p>
+            <!-- <p><%# link_to 'More info', organization_event_path(@organization, @event) %></p> -->
+            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">More info</button>
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Details</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p><%= event.details%></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
 
       <%= image_tag @organization.pictures[0].url(:large), class:'img-rounded', alt:"Cinque Terre" if @organization.pictures.present? %>
 
       <% if user_signed_in? %>
         <% if !current_user.org_memberships.where(organization: @organization).present? %>
-        <h2>Apply Here</h2>
-        <h4>Additional info</h4>
-        <p><%= @event.additional %></p>
-        <%= simple_form_for [@organization, @org_membership] do |f| %>
-          <%= f.input :detail %>
-          <%= f.submit class:'btn btn-primary', value:'Request' %>
-        <%end  %>
+          <h2>Apply Here</h2>
+          <h4>Additional info</h4>
+          <p><%= @organization.additional %></p>
+          <%= simple_form_for [@organization, @org_membership] do |f| %>
+            <%= f.input :detail %>
+            <%= f.submit class:'btn btn-primary', value:'Request' %>
+          <%end  %>
         <%# link_to 'Request', organization_org_memberships_path(@organization), class:"btn btn-primary", method: :post %>
-
         <% else %>
-        <%= link_to 'Cancel request', organization_org_membership_path(@organization), class:"btn btn-danger", method: :delete %>
+          <%= link_to 'Cancel request', organization_org_membership_path(@organization), class:"btn btn-danger", method: :delete %>
         <% end %>
       <% end %>
 
@@ -64,84 +62,83 @@
   </div>
 
   <% if organization_signed_in? && @organization == current_organization %>
-
-  <div class="row">
-    <h2>Manage</h2>
-    <hr>
-    <div class="col-lg-4">
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Pending</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @pending_memberships.each do |member| %>
-          <tr>
-            <td>
-              <%=link_to member.user.full_name, user_path(member.user)%>
-              <%= link_to 'Approve',organization_org_membership_membership_path(@organization, member, 1), method: :patch, class: 'btn btn-success btn-xs'  %>
-              <%= link_to 'Reject',organization_org_membership_membership_path(@organization, member, 0), method: :patch, class: 'btn btn-danger btn-xs' %>
-            </td>
-          </tr>
-          <% end  %>
+    <div class="row">
+      <h2>Manage</h2>
+      <hr>
+      <div class="col-lg-4">
+        <table class='table table-hover'>
+          <thead>
+            <tr>
+              <th>Pending</th>
+            </tr>
+          </thead>
           <tbody>
-          </table>
-        </div>
-        <div class="col-lg-4">
-          <table class='table table-hover'>
-            <thead>
+            <% @pending_memberships.each do |member| %>
               <tr>
-                <th>Approved</th>
+                <td>
+                  <%=link_to member.user.full_name, user_path(member.user)%>
+                  <%= link_to 'Approve',organization_org_membership_membership_path(@organization, member, 1), method: :patch, class: 'btn btn-success btn-xs'  %>
+                  <%= link_to 'Reject',organization_org_membership_membership_path(@organization, member, 0), method: :patch, class: 'btn btn-danger btn-xs' %>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              <% @approved_memberships.each do |member| %>
-                <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
-              <% end  %>
-            <tbody>
-          </table>
-        </div>
-        <div class="col-lg-4">
-          <table class='table table-hover'>
-            <thead>
-              <tr>
-                <th>Rejected</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @rejected_memberships.each do |member| %>
-                <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
-              <% end  %>
-            <tbody>
-          </table>
-        </div>
-  </div>
+            <% end  %>
+          <tbody>
+        </table>
+      </div>
+      <div class="col-lg-4">
+        <table class='table table-hover'>
+          <thead>
+            <tr>
+              <th>Approved</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @approved_memberships.each do |member| %>
+              <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
+            <% end  %>
+          <tbody>
+        </table>
+      </div>
+      <div class="col-lg-4">
+        <table class='table table-hover'>
+          <thead>
+            <tr>
+              <th>Rejected</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @rejected_memberships.each do |member| %>
+              <tr><td><%=link_to member.user.full_name, user_path(member.user)%></td></tr>
+            <% end  %>
+          <tbody>
+        </table>
+      </div>
+    </div>
   <% end  %>
 
   <div class="row">
-      <div class="col-lg-12">
-        <h2>Reviews</h2>
+    <div class="col-lg-12">
+      <h2>Reviews</h2>
+      <hr>
+    </div>
+    <div class="col-lg-6">
+      <% @organization.reviews.each do |review| %>
+        <p><strong>stars: </strong><%= review.star %></p>
+        <p><%= review.body %></p>
+        <p><strong><%= review.user.full_name %></strong></p>
         <hr>
-      </div>
-      <div class="col-lg-6">
-        <% @organization.reviews.each do |review| %>
-          <p><strong>stars: </strong><%= review.star %></p>
-          <p><%= review.body %></p>
-          <p><strong><%= review.user.full_name %></strong></p>
-          <hr>
-        <% end  %>
-      </div>
-      <% if user_signed_in? %>
-        <div class="col-lg-6">
-          <%= simple_form_for [@organization, @review] do |f| %>
-          <%= f.input :body  %>
-          <%= f.input :star %>
-          <%= f.submit %>
-          <% end  %>
-        </div>
       <% end  %>
     </div>
+    <% if user_signed_in? %>
+      <div class="col-lg-6">
+        <%= simple_form_for [@organization, @review] do |f| %>
+        <%= f.input :body  %>
+        <%= f.input :star %>
+        <%= f.submit %>
+        <% end  %>
+      </div>
+    <% end  %>
+  </div>
 </div>
 
 

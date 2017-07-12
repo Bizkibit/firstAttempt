@@ -51,6 +51,8 @@ gem 'geocoder'
 gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'erd'
+gem 'bootstrap-sass'
+gem 'cocoon'
 
 
 group :development, :test do
