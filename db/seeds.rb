@@ -19,7 +19,7 @@ Organization.destroy_all
 # end
 
 Organization.create([
-  
+
   {name: 'Retirement Concepts Seniors Services Ltd', address: '1090 W Georgia St, Vancouver, BC V6E 3V7
   ', website: 'retirementconcepts.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity" },
 
@@ -37,7 +37,7 @@ Organization.create([
   User.create({ first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, age: Time.now - rand(16..40).years-rand(0..364).days, password: 'pass123'})
 end
 
-me = User.create({first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.com', age: Time.now - 29.years, password: 'pass123', bio: Faker::Lorem.paragraph})
+me = User.create({first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.com', age: Time.now - 29.years, password: 'pass123', bio: Faker::Lorem.paragraph, is_admin: true})
 
 ["3894 Commercial St, Vancouver, BC V5N 4G2",
   "3077 Granville St #204, Vancouver, BC V6H 3J9",

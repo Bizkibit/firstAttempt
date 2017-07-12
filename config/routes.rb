@@ -2,11 +2,16 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
+
+
   resources :organizations do
     resources :org_memberships do
       resources :memberships, only:[:update]
       # patch('/:id', { to: 'memberships#apr', as: :approve })
       # patch('/:id', { to: 'memberships#rej', as: :reject })
+    end
+    namespace :admin do
+      resources :organizations, only: [:index, :update]
     end
     resources :events
     resources :reviews
