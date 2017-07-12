@@ -64,7 +64,7 @@ users = User.all
 
 organizations.each do |o|
   rand(1..2).times do
-    OrgMembership.create({user: users.sample, organization: o, aasm_state: ['pending','approved'].sample})
+    OrgMembership.create({user: users.sample, organization: o, aasm_state: ['pending','approved'].sample, detail: Faker::Lorem.paragraph})
   end
 end
 

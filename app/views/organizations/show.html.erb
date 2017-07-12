@@ -134,7 +134,7 @@
       <div class="col-lg-6">
         <%= simple_form_for [@organization, @review] do |f| %>
         <%= f.input :body  %>
-        <%= f.input :star %>
+        <%= f.input :star, collection: 1..5 %>
         <%= f.submit %>
         <% end  %>
       </div>

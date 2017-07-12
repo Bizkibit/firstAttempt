@@ -13,8 +13,8 @@
           <tr>
             <td>
               <%=link_to member.name, organization_path(member)%>
-              <%= link_to 'Approve', organization_admin_organization_path(member, 1), method: :patch, class: 'btn btn-success btn-xs'  %>
-              <%= link_to 'Reject', organization_admin_organization_path(member, 0), method: :patch, class: 'btn btn-danger btn-xs' %>
+              <%= link_to 'Approve', cunt_path(member, 1), method: :patch, class: 'btn btn-success btn-xs'  %>
+              <%= link_to 'Reject', cunt_path(member, 0), method: :patch, class: 'btn btn-danger btn-xs' %>
             </td>
           </tr>
         <% end  %>

@@ -2,17 +2,15 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-
-
   resources :organizations do
     resources :org_memberships do
       resources :memberships, only:[:update]
       # patch('/:id', { to: 'memberships#apr', as: :approve })
       # patch('/:id', { to: 'memberships#rej', as: :reject })
     end
-    namespace :admin do
-      resources :organizations, only: [:index, :update]
-    end
+    # namespace :admin do
+    #   resources :organizations, only: [:index, :update]
+    # end
     resources :events
     resources :reviews
   end
@@ -35,6 +33,9 @@ Rails.application.routes.draw do
   root 'organizations#index'
 
   get 'welcome/sign_in', {to: 'welcome#show', as: :welcome_sign_in}
+
+  get('admin/organizations', {to: 'admin/organizations#index', as: :admin_panel})
+  patch('/admin/organizations/:organization_id/:id', {to: 'admin/organizations#update', as: :cunt})
   # get('/questions/:id/edit', { to: 'questions#edit', as: :edit_question })
   # patch('/questions/:id', { to: 'questions#update' })
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

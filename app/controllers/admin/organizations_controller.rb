@@ -14,12 +14,12 @@ class Admin::OrganizationsController < Admin::BaseController
       @organization.approve
       @organization.save
       flash[:notice] = 'Membership approved'
-      redirect_to organization_admin_organizations_path
+      redirect_to admin_panel_path
     else
       @organization.reject
       @organization.save
       flash[:notice] = 'Membership rejected'
-      redirect_to organization_admin_organizations_path
+      redirect_to admin_panel_path
     end
   end
 

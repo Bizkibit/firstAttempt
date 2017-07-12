@@ -26,7 +26,7 @@
         <div class="panel-body">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <%= image_tag @user.picture.url(:large), class:'img-rounded', alt:"Cinque Terre", style: 'min-width:100%; min-height:100%; width:auto; height:auto;' if @user.picture.present? %>
+              <%= image_tag @user.picture.url(:medium), class:'img-rounded', alt:"Cinque Terre", style: 'min-width:100%; min-height:100%; width:auto; height:auto;' if @user.picture.present? %>
             </div>
           </div>
           <div class="panel panel-default">
