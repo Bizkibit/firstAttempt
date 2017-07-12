@@ -7,7 +7,11 @@ class Organization < ApplicationRecord
   has_many :events
 
   mount_uploaders :pictures, PictureUploader
+  serialize :pictures, JSON
 
+  accepts_nested_attributes_for :events,
+                                reject_if: :all_blank,
+                                allow_destroy: true
 
   # to search through the organization names
   scope :search, lambda {|query| where(["name LIKE ?", "%#{query}%"]) }

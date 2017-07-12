@@ -1,67 +1,33 @@
+<%= simple_form_for @organization, html: { multipart: true } do |f| %>
+  <div class="container">
+    <h1>Organizations Sign up</h1>
+    <hr>
+    <div class="col-lg-4">
+      <%= f.input :name %>
+      <%= f.input :website %>
+      <%= f.input :address %>
+      <%= f.input :additional, label:'additional info' %>
+      <%# f.input :pictures, multiple: true ,as: :text %>
+      <div class="form-group">
+        <%= f.file_field :pictures, multiple: true , class:'form-control'%>
+      </div>
+      <h2>Contact person</h2>
 
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :phone %>
+      <%= f.input :email %>
+      <%= f.input :password %>
+      <%= f.input :password_confirmation %>
 
-<%= @organization.errors.full_messages.join(', ') %>
+      <%= f.simple_fields_for :events do |r| %>
+       <%= render 'event_fields', f: r %>
+      <% end %>
 
-<%= form_for @organization, html: { multipart: true } do |f| %>
-<div class="container">
-  <h1>Organizations Sign up</h1>
-  <hr>
-  <div class="col-lg-4">
-
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class:"form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :website %>
-      <%= f.text_field :website, class:"form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :address %>
-      <%= f.text_field :address, class:"form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :pictures %>
-      <%= f.file_field :pictures, multiple: true %>
-    </div>
-
-    <h2>Contact person</h2>
-
-    <div class="form-group">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, class:"form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, class:"form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :phone %>
-      <%= f.text_field :phone, class:"form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.text_field :email, class:"form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class:"form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class:"form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.submit class:'btn btn-primary'%>
+     <div class="links">
+       <%= link_to_add_association 'add event', f, :events %>
+     </div>
+      <%= f.submit %>
     </div>
   </div>
-
-</div>
 <% end %>

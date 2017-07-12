@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
 
   def new
     @organization = Organization.new
-    2.times { @organization.events.build }
+    # 2.times { @organization.events.build }
   end
 
   def create
@@ -59,7 +59,13 @@ class OrganizationsController < ApplicationController
   private
 
   def organization_params
-    params.require(:organization).permit(:name, :first_name, :last_name, :website, :email, :phone, :password, :password_confirmation, :address, pictures: [])
+    params.require(:organization).permit(:name, :first_name, :last_name, :website, :email, :phone, :password, :password_confirmation, :address, :additional, pictures: [],  events_attributes: [:start_date,
+                                                                          :end_date,
+                                                                          :start_time,
+                                                                          :end_time,
+                                                                          :spots,
+                                                                          :details ] )
   end
+
 
 end

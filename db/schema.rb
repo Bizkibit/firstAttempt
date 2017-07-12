@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20170712052131) do
     t.float "longitude"
     t.float "latitude"
     t.text "additional"
-    t.json "pictures"
+    t.string "pictures"
     t.index ["name"], name: "index_organizations_on_name", unique: true
   end
 
