@@ -16,13 +16,13 @@ class OrgMembershipsController < ApplicationController
     redirect_to organization_path(@organization)
   end
 
-  def edit
-  end
-
-
-  def update
-    org_membership = OrgMembership.find(params[:id])
-  end
+  # def edit
+  # end
+  #
+  #
+  # def update
+  #   org_membership = OrgMembership.find(params[:id])
+  # end
 
   # destroy action is only usable by the user
   def destroy

@@ -10,16 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712170544) do
+ActiveRecord::Schema.define(version: 20170713002718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "ev_memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_ev_memberships_on_event_id"
+    t.index ["user_id"], name: "index_ev_memberships_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.time "start_time"
+    t.time "end_time"
     t.integer "spots"
     t.text "details"
     t.bigint "organization_id"
@@ -93,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170712170544) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "ev_memberships", "events"
+  add_foreign_key "ev_memberships", "users"
   add_foreign_key "events", "organizations"
   add_foreign_key "org_memberships", "organizations"
   add_foreign_key "org_memberships", "users"

@@ -48,7 +48,7 @@ me = User.create({first_name: 'Farshid', last_name: 'HM', email: 'admin@admin.co
   "900 W 12th Ave, Vancouver, BC V5Z 1N3",
   "725 Inglewood Ave, West Vancouver, BC V7T 1X5"
 ].each do |address|
-  Organization.create(name: Faker::Company.name+" Care", address: address, website: 'http://www.example.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email, additional: Faker::Lorem.paragraph + "\n" + "please proive your availablity")
+  Organization.create(name: Faker::Company.name+" Care", address: address, website: 'http://www.example.com', first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, password: 'pass123', email: Faker::Internet.safe_email, additional: Faker::Lorem.paragraph + "\n" + "Please specify your availablity")
 end
 
 

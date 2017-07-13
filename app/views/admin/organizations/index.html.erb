@@ -13,7 +13,11 @@
           <tr>
             <td>
               <%=link_to member.name, organization_path(member)%>
+            </td>
+            <td>
               <%= link_to 'Approve', cunt_path(member, 1), method: :patch, class: 'btn btn-success btn-xs'  %>
+            </td>
+            <td>
               <%= link_to 'Reject', cunt_path(member, 0), method: :patch, class: 'btn btn-danger btn-xs' %>
             </td>
           </tr>

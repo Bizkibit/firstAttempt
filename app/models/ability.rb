@@ -5,15 +5,22 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
       user ||= User.new # guest user (not logged in)
+
+      # organization ||=Organization.new
+
     #   if user.admin?
     #     can :manage, :all
     #   else
     #     can :read, :all
     #   end
 
+
       if user.is_admin?
         can :manage, :all
       end
+
+      can [:create, :destroy], OrgMembership
+      
 
     # The first argument to `can` is the action you are giving the user
     # permission to do.

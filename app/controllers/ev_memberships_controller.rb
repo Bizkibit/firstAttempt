@@ -1,0 +1,2 @@
+class EvMembershipsController < ApplicationController
+end

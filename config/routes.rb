@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
+  root 'organizations#index'
   get 'welcome/index'
 
   resources :organizations do
-    resources :org_memberships do
+    resources :org_memberships, only: [:create, :destroy]  do
       resources :memberships, only:[:update]
       # patch('/:id', { to: 'memberships#apr', as: :approve })
       # patch('/:id', { to: 'memberships#rej', as: :reject })
@@ -11,13 +12,16 @@ Rails.application.routes.draw do
     # namespace :admin do
     #   resources :organizations, only: [:index, :update]
     # end
-    resources :events
+    resources :events do
+      resources :ev_memberships, only: [:create, :destroy]
+    end
+
     resources :reviews
   end
 
   resources :filters, only: [:create]
-
-  resources :users
+  resources :users, except: [:destroy]
+  resources :nearby_organizations, only: :index
 
   resources :sessions, only: [:create, :new] do
     delete :destroy, on: :collection
@@ -27,15 +31,12 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
-  resources :nearby_organizations, only: :index
 
   # root 'welcome#index'
-  root 'organizations#index'
-
-  get 'welcome/sign_in', {to: 'welcome#show', as: :welcome_sign_in}
 
   get('admin/organizations', {to: 'admin/organizations#index', as: :admin_panel})
   patch('/admin/organizations/:organization_id/:id', {to: 'admin/organizations#update', as: :cunt})
+
   # get('/questions/:id/edit', { to: 'questions#edit', as: :edit_question })
   # patch('/questions/:id', { to: 'questions#update' })
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

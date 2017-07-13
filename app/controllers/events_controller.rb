@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+
   def new
     @organization = Organization.find(params[:organization_id])
     @event = Event.new
@@ -7,7 +8,7 @@ class EventsController < ApplicationController
   def create
     @organization = Organization.find(params[:organization_id])
     @event = Event.new event_params
-    @organization.event = @event
+    @event.organization = @organization
     if @event.save
       flash[:notice] = 'Event created!'
       redirect_to organization_path(@organization)
@@ -19,7 +20,6 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-
   end
 
   def edit

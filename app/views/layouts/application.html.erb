@@ -42,7 +42,7 @@
 
           <% elsif organization_signed_in?%>
 
-            <li><%= link_to 'organization panel', organization_path(current_organization) %></li>
+            <li><%= link_to 'Organization panel', organization_path(current_organization) %></li>
             <li><%= link_to "Sign Out", orgsessions_path, method: :delete %></li>
             <li class='active'><a href='#'>Hello <%= current_organization.name %></a></li>
 
