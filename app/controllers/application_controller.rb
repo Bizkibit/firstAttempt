@@ -28,6 +28,16 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_organization
 
+  def approved_memberships
+    current_user.org_memberships.where(aasm_state: 'approved')
+  end
+  helper_method :approved_memberships
+
+  def approved_members
+    current_organization.org_memberships.where(aasm_state: 'approved')
+  end
+  helper_method :approved_members
+
   def authenticate_user!
     if !user_signed_in?
       redirect_to new_session_path, notice: 'Please sign in!'

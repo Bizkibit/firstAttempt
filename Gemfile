@@ -53,6 +53,7 @@ gem 'underscore-rails'
 gem 'erd'
 gem 'bootstrap-sass'
 gem 'cocoon'
+gem "simple_calendar", "~> 2.0"
 
 
 group :development, :test do
