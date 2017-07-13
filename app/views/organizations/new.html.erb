@@ -4,7 +4,7 @@
     <hr>
     <div class="col-lg-4">
       <%= f.input :name %>
-      <%= f.input :website %>
+      <%= f.input :website, as: :url %>
       <%= f.input :address %>
       <%= f.input :additional, label:'additional info' %>
       <%# f.input :pictures, multiple: true ,as: :text %>
@@ -15,7 +15,7 @@
 
       <%= f.input :first_name %>
       <%= f.input :last_name %>
-      <%= f.input :phone %>
+      <%= f.input :phone, as: :tel %>
       <%= f.input :email %>
       <%= f.input :password %>
       <%= f.input :password_confirmation %>
