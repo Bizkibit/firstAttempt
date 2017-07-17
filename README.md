@@ -1,24 +1,5 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Please Make sure to run ```db:create``` and ```db:seed``` to populate the data for the app after cloning the project.
+to run this properly in needs to be run on rails version 5.1 and upper.
+furthermore to get the full potential of the app, make sure you create a user.
